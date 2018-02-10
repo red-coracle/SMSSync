@@ -24,7 +24,6 @@ import org.addhen.smssync.R;
 import org.addhen.smssync.data.cache.FileManager;
 import org.addhen.smssync.data.entity.Message;
 import org.addhen.smssync.data.message.PostMessage;
-import org.addhen.smssync.data.message.TweetMessage;
 import org.addhen.smssync.data.util.Logger;
 import org.addhen.smssync.presentation.App;
 import org.addhen.smssync.presentation.di.component.AppComponent;
@@ -45,7 +44,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.os.Process;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.SmsMessage;
 
 import java.lang.ref.WeakReference;
@@ -63,9 +62,6 @@ public class SmsReceiverService extends Service implements HasComponent<AppServi
 
     @Inject
     PostMessage mPostMessage;
-
-    @Inject
-    TweetMessage mTweetMessage;
 
     private static final String ACTION_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
 
@@ -265,12 +261,6 @@ public class SmsReceiverService extends Service implements HasComponent<AppServi
             // Log received SMS
             mFileManager.append(
                     getString(R.string.received_msg, msg.getMessageBody(), msg.getMessageFrom()));
-
-            // Route the SMS
-            if (App.getTwitterInstance().getSessionManager().getActiveSession() != null) {
-                boolean status = mTweetMessage.routeSms(msg);
-                showNotification(status);
-            }
 
             boolean status = mPostMessage.routeSms(msg);
             showNotification(status);

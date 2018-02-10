@@ -18,7 +18,6 @@
 package org.addhen.smssync.presentation.service;
 
 import org.addhen.smssync.data.message.PostMessage;
-import org.addhen.smssync.data.message.TweetMessage;
 
 import android.content.Intent;
 
@@ -39,9 +38,6 @@ public class AutoSyncScheduledService extends BaseWakefulIntentService {
     @Inject
     PostMessage mProcessMessage;
 
-    @Inject
-    TweetMessage mTweetMessage;
-
     public AutoSyncScheduledService() {
         super(CLASS_TAG);
         statusIntent = new Intent(ServiceConstants.AUTO_SYNC_ACTION);
@@ -55,7 +51,6 @@ public class AutoSyncScheduledService extends BaseWakefulIntentService {
     @Override
     protected void executeTask(Intent intent) {
         log(CLASS_TAG, "doWakefulWork() executing " + CLASS_TAG);
-        mTweetMessage.syncPendingMessages();
         mProcessMessage.syncPendingMessages();
         statusIntent.putExtra("status", mProcessMessage.getErrorMessage());
         sendBroadcast(statusIntent);

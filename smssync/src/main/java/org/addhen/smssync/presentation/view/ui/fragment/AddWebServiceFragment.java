@@ -25,7 +25,6 @@ import org.addhen.smssync.presentation.model.SyncSchemeModel;
 import org.addhen.smssync.presentation.model.WebServiceModel;
 import org.addhen.smssync.presentation.presenter.webservice.AddWebServicePresenter;
 import org.addhen.smssync.presentation.util.Utility;
-import org.addhen.smssync.presentation.view.ui.activity.QrcodeReaderActivity;
 import org.addhen.smssync.presentation.view.webservice.AddWebServiceView;
 import org.addhen.smssync.presentation.view.webservice.TestWebServiceView;
 
@@ -291,14 +290,6 @@ public class AddWebServiceFragment extends BaseFragment implements AddWebService
         getActivity().finish();
     }
 
-    @OnClick(R.id.qr_code_scanner)
-    public void onQrCodeScannerClick() {
-        // Use this fragment to start the QR code scanner so the fragment's
-        // onActivityResult method would be called
-        startActivityForResult(QrcodeReaderActivity.getIntent(getActivity()),
-                QrcodeReaderActivity.QRCODE_READER_REQUEST_CODE);
-    }
-
     @OnClick(R.id.test_integration)
     public void testIntegration() {
         final String url = mEditTextUrl.getText().toString();
@@ -422,14 +413,5 @@ public class AddWebServiceFragment extends BaseFragment implements AddWebService
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == QrcodeReaderActivity.QRCODE_READER_REQUEST_CODE) {
-            if (resultCode == getActivity().RESULT_OK) {
-                final WebServiceModel webServiceModel = (WebServiceModel) data.getParcelableExtra(
-                        QrcodeReaderActivity.INTENT_EXTRA_PARAM_BARCODE_WEB_SERVICE_MODEL);
-                setWebService(webServiceModel);
-                return;
-            }
-            showToast(getString(R.string.invalid_qr_code_string));
-        }
     }
 }

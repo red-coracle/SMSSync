@@ -20,8 +20,6 @@ package org.addhen.smssync.presentation;
 import com.addhen.android.raiburari.presentation.BaseApplication;
 
 import org.addhen.smssync.BuildConfig;
-import org.addhen.smssync.data.twitter.TwitterBuilder;
-import org.addhen.smssync.data.twitter.TwitterClient;
 import org.addhen.smssync.presentation.di.component.AppComponent;
 
 import timber.log.Timber;
@@ -33,27 +31,13 @@ public class App extends BaseApplication {
 
     private static AppComponent mAppComponent;
 
-    private static TwitterClient mTwitter;
-
     private static App mApp;
-
-
-    public static synchronized TwitterClient getTwitterInstance() {
-        if (mTwitter == null) {
-            mTwitter = new TwitterBuilder(mApp,
-                    BuildConfig.TWITTER_CONSUMER_KEY,
-                    BuildConfig.TWITTER_CONSUMER_SECRET)
-                    .build();
-        }
-        return mTwitter;
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         initializeInjector();
         mApp = this;
-        Timber.plant(new FirebaseCrashTree());
     }
 
     private void initializeInjector() {

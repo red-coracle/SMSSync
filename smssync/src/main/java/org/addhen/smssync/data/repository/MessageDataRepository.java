@@ -20,7 +20,6 @@ package org.addhen.smssync.data.repository;
 import org.addhen.smssync.data.entity.Message;
 import org.addhen.smssync.data.entity.mapper.MessageDataMapper;
 import org.addhen.smssync.data.message.PostMessage;
-import org.addhen.smssync.data.message.TweetMessage;
 import org.addhen.smssync.data.repository.datasource.message.MessageDataSource;
 import org.addhen.smssync.data.repository.datasource.message.MessageDataSourceFactory;
 import org.addhen.smssync.domain.entity.MessageEntity;
@@ -51,17 +50,13 @@ public class MessageDataRepository implements MessageRepository {
 
     private PostMessage mPostMessage;
 
-    private TweetMessage mTweetMessage;
-
     @Inject
     public MessageDataRepository(MessageDataMapper messageDataMapper,
             MessageDataSourceFactory messageDataSourceFactory,
-            PostMessage postMessage,
-            TweetMessage tweetMessage) {
+            PostMessage postMessage) {
         mMessageDataMapper = messageDataMapper;
         mMessageDataSourceFactory = messageDataSourceFactory;
         mPostMessage = postMessage;
-        mTweetMessage = tweetMessage;
     }
 
     @Override
@@ -102,7 +97,6 @@ public class MessageDataRepository implements MessageRepository {
         return Observable.defer(() -> {
             boolean status = true;
             List<Message> messages = Arrays.asList(mMessageDataMapper.map(messageEntities));
-            mTweetMessage.tweetMessages(messages);
             status = mPostMessage.postMessage(messages);
             return Observable.just(status);
         });
@@ -114,7 +108,6 @@ public class MessageDataRepository implements MessageRepository {
             mMessageDataSource = mMessageDataSourceFactory.createMessageDatabaseSource();
             List<Message> messages = mMessageDataSource.syncFetchPending();
             boolean status = true;
-            mTweetMessage.tweetMessages(messages);
             status = mPostMessage.postMessage(messages);
             return Observable.just(status);
         });

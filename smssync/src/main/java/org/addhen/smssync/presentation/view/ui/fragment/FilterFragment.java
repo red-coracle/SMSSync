@@ -21,7 +21,6 @@ import com.addhen.android.raiburari.presentation.ui.fragment.BaseFragment;
 
 import org.addhen.smssync.R;
 import org.addhen.smssync.data.PrefsFactory;
-import org.addhen.smssync.data.twitter.TwitterClient;
 import org.addhen.smssync.presentation.di.component.FilterComponent;
 import org.addhen.smssync.presentation.model.FilterModel;
 import org.addhen.smssync.presentation.model.WebServiceModel;
@@ -68,9 +67,6 @@ public class FilterFragment extends BaseFragment implements ListFilterView,
     @Inject
     PrefsFactory mPrefsFactory;
 
-    @Inject
-    TwitterClient mTwitterClient;
-
     @BindView(R.id.custom_integration_filter_container)
     LinearLayout mFilterViewGroup;
 
@@ -99,7 +95,6 @@ public class FilterFragment extends BaseFragment implements ListFilterView,
     public void onResume() {
         super.onResume();
         mFilterViewGroup.removeAllViews();
-        initTwitterView();
         mListFilterPresenter.resume();
         mUpdateWebServiceKeywordsPresenter.resume();
     }
@@ -170,51 +165,6 @@ public class FilterFragment extends BaseFragment implements ListFilterView,
     private void initialize() {
         mListFilterPresenter.setView(this);
         mUpdateWebServiceKeywordsPresenter.setView(this);
-    }
-
-    private void initTwitterView() {
-        if ((mTwitterClient != null) && (mTwitterClient.getSessionManager().getActiveSession()
-                != null)) {
-            FilterKeywordsView filterKeywordsView = new FilterKeywordsView(
-                    getContext());
-
-            final SwitchCompat filterKeywordsSwitch = filterKeywordsView
-                    .getSwitchCompat();
-            filterKeywordsSwitch.setChecked(mPrefsFactory.enableTwitterKeywords().get());
-            if (filterKeywordsSwitch.isChecked()) {
-                filterKeywordsView.visible(true);
-            }
-            filterKeywordsView.setSwitchListener(v -> {
-                if (filterKeywordsSwitch.isChecked()) {
-                    filterKeywordsSwitch.setChecked(true);
-                    mPrefsFactory.enableTwitterKeywords().set(true);
-                } else {
-                    filterKeywordsSwitch.setChecked(false);
-                    mPrefsFactory.enableTwitterKeywords().set(false);
-                }
-            });
-
-            filterKeywordsView.setFilterItemListener(v -> {
-                mLauncher.launchAddTwitterKeyword();
-            });
-
-            final AppCompatTextView title = filterKeywordsView.getTitle();
-            title.setText(R.string.twitter);
-            final Drawable customWebServiceDrawable = ContextCompat.getDrawable(getContext(),
-                    R.drawable.ic_twitter_blue_24dp);
-            title.setCompoundDrawablesWithIntrinsicBounds(customWebServiceDrawable, null, null,
-                    null);
-            AppCompatTextView filterKeywordCount = filterKeywordsView
-                    .getFilterKeywordCount();
-            if (mPrefsFactory.twitterKeywords().get() != null && TextUtils
-                    .isEmpty(mPrefsFactory.twitterKeywords().get())) {
-                String[] keywords = mPrefsFactory.twitterKeywords().get().split(",");
-                filterKeywordCount.setText(keywords.length);
-            } else {
-                filterKeywordCount.setText(0);
-            }
-            mFilterViewGroup.addView(filterKeywordsView);
-        }
     }
 
     private void initBlackListFilters(String count) {

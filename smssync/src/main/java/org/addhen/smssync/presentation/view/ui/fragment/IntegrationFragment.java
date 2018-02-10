@@ -74,15 +74,6 @@ public class IntegrationFragment extends BaseFragment implements IntegrationView
         }
     }
 
-    @OnClick(R.id.integration_twitter)
-    void onTwitterClicked() {
-        if (App.getTwitterInstance().getSessionManager().getActiveSession() == null) {
-            App.getTwitterInstance().login(getActivity());
-            return;
-        }
-        mLauncher.launchTwitterProfile();
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -106,7 +97,7 @@ public class IntegrationFragment extends BaseFragment implements IntegrationView
 
     @Override
     public void totalActiveWebService(int total) {
-        if (total > 0 || App.getTwitterInstance().getSessionManager().getActiveSession() != null) {
+        if (total > 0) {
             startService();
             return;
         }

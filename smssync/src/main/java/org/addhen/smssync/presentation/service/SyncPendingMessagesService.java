@@ -21,7 +21,6 @@ import org.addhen.smssync.R;
 import org.addhen.smssync.data.cache.FileManager;
 import org.addhen.smssync.data.entity.mapper.MessageDataMapper;
 import org.addhen.smssync.data.message.PostMessage;
-import org.addhen.smssync.data.message.TweetMessage;
 import org.addhen.smssync.data.util.Logger;
 import org.addhen.smssync.domain.entity.MessageEntity;
 import org.addhen.smssync.domain.repository.MessageRepository;
@@ -33,7 +32,7 @@ import org.addhen.smssync.presentation.view.ui.activity.MainActivity;
 
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,9 +61,6 @@ public class SyncPendingMessagesService extends BaseWakefulIntentService {
 
     @Inject
     PostMessage mPostMessage;
-
-    @Inject
-    TweetMessage mTweetMessage;
 
     @Inject
     MessageRepository mMessageRepository;
@@ -163,11 +159,6 @@ public class SyncPendingMessagesService extends BaseWakefulIntentService {
             int successCounter = 0;
             for (int i = 0; i < listMessages.size(); i++) {
                 MessageEntity m = listMessages.get(i);
-                // route the message to twitter
-                if (App.getTwitterInstance().getSessionManager().getActiveSession() != null) {
-                    // TODO: show status message for twitter
-                    mTweetMessage.tweetPendingMessage(mMessageDataMapper.map(m));
-                }
                 // route the message to the appropriate enabled sync URL
                 if (!mPostMessage.routePendingMessage(mMessageDataMapper.map(m))) {
                     failedCounter++;

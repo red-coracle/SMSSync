@@ -48,17 +48,6 @@ public class GettingStartedIntegrationFragment extends BaseFragment {
         super.onResume();
     }
 
-    @OnClick(R.id.twitter)
-    void onTwitterClicked() {
-        if (App.getTwitterInstance().getSessionManager().getActiveSession() == null) {
-            App.getTwitterInstance().login(getActivity());
-            return;
-        }
-        // Show profile
-        ((MainActivity) getActivity()).replaceFragment(R.id.fragment_main_content,
-                TwitterProfileFragment.newInstance(), "twitter_profile");
-    }
-
     @OnClick(R.id.custom_web_service)
     void onCustomWebServiceClicked() {
         getActivity().startActivity(ListWebServiceActivity.getIntent(getActivity()));

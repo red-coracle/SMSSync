@@ -37,7 +37,7 @@ import android.net.NetworkInfo;
 import android.provider.Telephony;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;

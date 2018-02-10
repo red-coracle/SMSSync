@@ -24,14 +24,11 @@ import org.addhen.smssync.data.PrefsFactory;
 import org.addhen.smssync.data.cache.FileManager;
 import org.addhen.smssync.data.message.PostMessage;
 import org.addhen.smssync.data.message.ProcessMessageResult;
-import org.addhen.smssync.data.message.TweetMessage;
 import org.addhen.smssync.data.net.AppHttpClient;
 import org.addhen.smssync.data.net.MessageHttpClient;
 import org.addhen.smssync.data.repository.datasource.filter.FilterDataSourceFactory;
 import org.addhen.smssync.data.repository.datasource.message.MessageDataSourceFactory;
 import org.addhen.smssync.data.repository.datasource.webservice.WebServiceDataSourceFactory;
-import org.addhen.smssync.data.twitter.TwitterBuilder;
-import org.addhen.smssync.data.twitter.TwitterClient;
 import org.addhen.smssync.presentation.App;
 import org.addhen.smssync.smslib.sms.ProcessSms;
 
@@ -92,15 +89,6 @@ public class AppModule {
 
     @Provides
     @Singleton
-    TwitterClient provideTwitterApp() {
-        return new TwitterBuilder(mApp,
-                BuildConfig.TWITTER_CONSUMER_KEY,
-                BuildConfig.TWITTER_CONSUMER_SECRET)
-                .build();
-    }
-
-    @Provides
-    @Singleton
     ProcessMessageResult provideProcessMessageResult(Context context, AppHttpClient appHttpClient,
             FileManager fileManager, WebServiceDataSourceFactory webServiceDataSourceFactory,
             MessageDataSourceFactory messageDataSourceFactory) {
@@ -118,7 +106,6 @@ public class AppModule {
             FilterDataSourceFactory filterDataSourceFactory,
             ProcessSms processSms,
             FileManager fileManager,
-            TwitterClient twitterApp,
             ProcessMessageResult processMessageResult) {
         return new PostMessage(
                 context,
@@ -130,29 +117,6 @@ public class AppModule {
                 processSms,
                 fileManager,
                 processMessageResult
-        );
-    }
-
-    @Provides
-    @Singleton
-    TweetMessage provideTweetMessage(Context context, PrefsFactory prefsFactory,
-            MessageHttpClient messageHttpClient,
-            MessageDataSourceFactory messageDataSourceFactory,
-            WebServiceDataSourceFactory webServiceDataSourceFactory,
-            FilterDataSourceFactory filterDataSourceFactory,
-            ProcessSms processSms,
-            FileManager fileManager,
-            TwitterClient twitterApp,
-            ProcessMessageResult processMessageResult) {
-        return new TweetMessage(
-                context,
-                prefsFactory,
-                twitterApp,
-                messageDataSourceFactory.createMessageDatabaseSource(),
-                webServiceDataSourceFactory.createDatabaseDataSource(),
-                filterDataSourceFactory.createFilterDataSource(),
-                processSms,
-                fileManager
         );
     }
 }

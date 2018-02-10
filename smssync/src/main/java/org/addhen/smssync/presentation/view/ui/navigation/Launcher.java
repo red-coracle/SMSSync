@@ -20,12 +20,10 @@ package org.addhen.smssync.presentation.view.ui.navigation;
 import org.addhen.smssync.presentation.model.WebServiceModel;
 import org.addhen.smssync.presentation.view.ui.activity.AddKeywordsActivity;
 import org.addhen.smssync.presentation.view.ui.activity.AddPhoneNumberActivity;
-import org.addhen.smssync.presentation.view.ui.activity.AddTwitterKeywordsActivity;
 import org.addhen.smssync.presentation.view.ui.activity.AddWebServiceActivity;
 import org.addhen.smssync.presentation.view.ui.activity.GettingStartedActivity;
 import org.addhen.smssync.presentation.view.ui.activity.ListWebServiceActivity;
 import org.addhen.smssync.presentation.view.ui.activity.SettingsActivity;
-import org.addhen.smssync.presentation.view.ui.activity.TwitterProfileActivity;
 import org.addhen.smssync.presentation.view.ui.activity.UpdateWebServiceActivity;
 
 import android.app.Activity;
@@ -67,13 +65,6 @@ public class Launcher {
     }
 
     /**
-     * Launches the barcode reader
-     */
-    public void launchTwitterProfile() {
-        mActivity.startActivity(TwitterProfileActivity.getIntent(mActivity));
-    }
-
-    /**
      * Launches activity for adding a new phone number
      */
     public void launchAddPhoneNumber() {
@@ -85,12 +76,5 @@ public class Launcher {
      */
     public void launchAddKeyword(WebServiceModel webServiceModel) {
         mActivity.startActivity(AddKeywordsActivity.getIntent(mActivity, webServiceModel));
-    }
-
-    /**
-     * Launches activity for adding a new keyword for twitter service
-     */
-    public void launchAddTwitterKeyword() {
-        mActivity.startActivity(AddTwitterKeywordsActivity.getIntent(mActivity));
     }
 }
