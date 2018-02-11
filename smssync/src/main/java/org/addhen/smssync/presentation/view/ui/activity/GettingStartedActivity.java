@@ -18,7 +18,6 @@
 package org.addhen.smssync.presentation.view.ui.activity;
 
 import com.addhen.android.raiburari.presentation.ui.activity.BaseActivity;
-import com.nineoldandroids.view.ViewHelper;
 
 import org.addhen.smssync.R;
 import org.addhen.smssync.presentation.view.ui.fragment.GettingStartedIntegrationFragment;
@@ -279,24 +278,24 @@ public class GettingStartedActivity extends BaseActivity {
             View textHead = page.findViewById(R.id.getting_started_welcome_heading);
 
             if (0 <= position && position < 1) {
-                ViewHelper.setTranslationX(page, pageWidth * -position);
+                page.setTranslationX(pageWidth * -position);
             }
             if (-1 < position && position < 0) {
-                ViewHelper.setTranslationX(page, pageWidth * -position);
+                page.setTranslationX(pageWidth * -position);
             }
             if (!(position <= -1.0f) || !(position >= 1.0f)) {
                 if (backgroundView != null) {
-                    ViewHelper.setAlpha(backgroundView, 1.0f - Math.abs(position));
+                    backgroundView.setAlpha(1.0f - Math.abs(position));
                 }
 
                 if (textHead != null) {
-                    ViewHelper.setTranslationX(textHead, pageWidth * position);
-                    ViewHelper.setAlpha(textHead, 1.0f - Math.abs(position));
+                    textHead.setTranslationX(pageWidth * position);
+                    textHead.setAlpha(1.0f - Math.abs(position));
                 }
 
                 if (textContent != null) {
-                    ViewHelper.setTranslationX(textContent, pageWidth * position);
-                    ViewHelper.setAlpha(textContent, 1.0f - Math.abs(position));
+                    textContent.setTranslationX(pageWidth * position);
+                    textContent.setAlpha(1.0f - Math.abs(position));
                 }
             }
         }

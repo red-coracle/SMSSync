@@ -19,7 +19,6 @@ package org.addhen.smssync.presentation.view.ui.fragment;
 
 import com.addhen.android.raiburari.presentation.ui.fragment.BaseRecyclerViewFragment;
 import com.cocosw.bottomsheet.BottomSheet;
-import com.nineoldandroids.view.ViewHelper;
 
 import org.addhen.smssync.R;
 import org.addhen.smssync.presentation.di.component.MessageComponent;
@@ -167,8 +166,8 @@ public class PublishedMessageFragment extends BaseRecyclerViewFragment<MessageMo
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             // Fade out the view as it is swiped out of the parent's bounds
             final float alpha = 1.0f - Math.abs(dX) / (float) itemView.getWidth();
-            ViewHelper.setAlpha(itemView, alpha);
-            ViewHelper.setTranslationX(itemView, dX);
+            itemView.setAlpha(alpha);
+            itemView.setTranslationX(dX);
             Drawable d;
             // Swiping right
             if (dX > 0) {
@@ -271,7 +270,7 @@ public class PublishedMessageFragment extends BaseRecyclerViewFragment<MessageMo
             @Override
             public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 super.clearView(recyclerView, viewHolder);
-                ViewHelper.setAlpha(viewHolder.itemView, 1.0f);
+                viewHolder.itemView.setAlpha(1.0f);
                 viewHolder.itemView.setBackgroundColor(0);
             }
 

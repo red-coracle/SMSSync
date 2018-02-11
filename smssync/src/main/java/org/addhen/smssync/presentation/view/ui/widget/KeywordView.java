@@ -17,12 +17,10 @@
 
 package org.addhen.smssync.presentation.view.ui.widget;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.PropertyValuesHolder;
-import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 
 import org.addhen.smssync.R;
 
@@ -324,7 +322,7 @@ public class KeywordView extends LinearLayout {
         if (!mIsAnimated) {
             return;
         }
-        ViewPropertyAnimator.animate(view)
+        view.animate()
                 .scaleX(1.2f)
                 .scaleY(1.2f)
                 .setDuration(100)
@@ -359,9 +357,9 @@ public class KeywordView extends LinearLayout {
         if (!mIsAnimated) {
             return;
         }
-        ViewHelper.setScaleY(view, 1.2f);
-        ViewHelper.setScaleX(view, 1.2f);
-        ViewPropertyAnimator.animate(view)
+        view.setScaleY(1.2f);
+        view.setScaleX(1.2f);
+        view.animate()
                 .scaleX(1f)
                 .scaleY(1f)
                 .setDuration(100)
@@ -377,9 +375,9 @@ public class KeywordView extends LinearLayout {
         long animationDelay = 600;
 
         animationDelay += position * 30;
-        ViewHelper.setScaleY(view, 0);
-        ViewHelper.setScaleX(view, 0);
-        ViewPropertyAnimator.animate(view)
+        view.setScaleY(0);
+        view.setScaleX(0);
+        view.animate()
                 .scaleY(1)
                 .scaleX(1)
                 .setDuration(200)
@@ -396,8 +394,8 @@ public class KeywordView extends LinearLayout {
         long animationDelay = 600;
 
         animationDelay += position * 30;
-        ViewHelper.setScaleY(view, 1f);
-        ViewHelper.setScaleX(view, 1f);
+        view.setScaleY(1f);
+        view.setScaleX(1f);
         ObjectAnimator scaleDown
                 = ObjectAnimator.ofPropertyValuesHolder(view,
                 PropertyValuesHolder.ofFloat("scaleX", 1.15f, 1.0f),
