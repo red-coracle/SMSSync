@@ -30,6 +30,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -135,8 +136,7 @@ public class KeywordView extends LinearLayout {
                         dipToPixels(mTagDrawablePadding));
         mTagTextSize = attributesArray.getDimension(
                 R.styleable.TagView_tagTextSize, DEFAULT_TEXT_SIZE);
-        mTagTextColor = attributesArray.getColor(R.styleable.TagView_tagTextColor,
-                mContext.getResources().getColor(mTagTextColor));
+        mTagTextColor = attributesArray.getColor(R.styleable.TagView_tagTextColor, ContextCompat.getColor(mContext, mTagTextColor));
         mIsAnimated = attributesArray.getBoolean(
                 R.styleable.TagView_isActionAnimated, mIsAnimated);
         attributesArray.recycle();

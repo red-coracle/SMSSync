@@ -17,8 +17,11 @@
 
 package org.addhen.smssync.smslib.util;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 
 /**
@@ -39,10 +42,14 @@ public class Util {
      * @return a string of the phone number on the device
      */
     public static String getMyPhoneNumber(Context context) {
-        TelephonyManager mTelephonyMgr;
-        mTelephonyMgr = (TelephonyManager)
-                context.getSystemService(Context.TELEPHONY_SERVICE);
-        return mTelephonyMgr.getLine1Number();
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            TelephonyManager mTelephonyMgr;
+            mTelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            return mTelephonyMgr.getLine1Number();
+        } else {
+            // TODO: Gracefully handle and request permission.
+            return null;
+        }
     }
 
     /**

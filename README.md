@@ -10,6 +10,9 @@ Read about it at **[smssync.ushahidi.com](http://smssync.ushahidi.com/)**.
 * Don't require setting as SMS app
 * Probably other stuff
 
+## Todo
+* Request permissions on use
+
 ## Installation
 
 Installation and configuration details are [here][1].

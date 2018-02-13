@@ -153,7 +153,7 @@ public class PersistedSessionManager<T extends Session> implements SessionManage
         if (mActiveSessionRef.get() != null && mActiveSessionRef.get().getId() == id) {
             synchronized (this) {
                 mActiveSessionRef.set(null);
-                mSharedPreferences.edit().remove(mPrefKeyActiveSession).commit();
+                mSharedPreferences.edit().remove(mPrefKeyActiveSession).apply();
             }
         }
 
@@ -169,14 +169,14 @@ public class PersistedSessionManager<T extends Session> implements SessionManage
     private void internalSetSession(long id, T session, boolean forceUpdate) {
         mSessionMap.put(id, session);
         mSharedPreferences.edit().putString(getPrefKey(id), mSerializer.serialize(session))
-                .commit();
+                .apply();
 
         final T activeSession = mActiveSessionRef.get();
         if (activeSession == null || forceUpdate) {
             synchronized (this) {
                 mActiveSessionRef.compareAndSet(activeSession, session);
                 mSharedPreferences.edit()
-                        .putString(ACTIVE_SESSION_KEY, mSerializer.serialize(session));
+                        .putString(ACTIVE_SESSION_KEY, mSerializer.serialize(session)).apply();
             }
         }
     }
