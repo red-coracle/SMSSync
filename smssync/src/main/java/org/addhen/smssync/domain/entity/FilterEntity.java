@@ -26,6 +26,8 @@ import com.addhen.android.raiburari.domain.entity.Entity;
  */
 public class FilterEntity extends Entity {
 
+    public Long _id;
+
     private String phoneNumber;
 
     private Status status;

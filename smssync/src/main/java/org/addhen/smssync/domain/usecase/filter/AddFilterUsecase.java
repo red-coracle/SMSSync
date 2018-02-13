@@ -26,7 +26,7 @@ import org.addhen.smssync.domain.repository.FilterRepository;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * @author Ushahidi Team <team@ushahidi.com>

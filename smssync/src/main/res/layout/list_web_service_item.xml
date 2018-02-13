@@ -35,7 +35,7 @@
             android:layout_alignParentEnd="true"/>
 
 
-    <com.addhen.android.raiburari.presentation.ui.widget.CapitalizedTextView
+    <com.addhen.android.raiburari.presentation.view.ui.widget.CapitalizedTextView
             android:id="@+id/web_service_title"
             style="@style/TextView.Title"
             android:text="Demo deployment"

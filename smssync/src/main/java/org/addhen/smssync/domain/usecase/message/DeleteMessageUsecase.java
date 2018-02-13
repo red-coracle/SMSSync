@@ -27,7 +27,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Delete message use case

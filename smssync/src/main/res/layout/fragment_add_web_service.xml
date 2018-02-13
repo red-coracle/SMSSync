@@ -35,7 +35,7 @@
                 android:padding="@dimen/view_spacing_normal"
                 android:animateLayoutChanges="true">
 
-            <com.addhen.android.raiburari.presentation.ui.widget.FontSupportedTextView
+            <com.addhen.android.raiburari.presentation.view.ui.widget.FontSupportedTextView
                     android:id="@+id/textview_custom_web_service_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                     android:id="@+id/qr_code_scanner"
                     android:src="@drawable/qr_code_icon"
                     android:background="?attr/selectableItemBackgroundBorderless"/>
-            <com.addhen.android.raiburari.presentation.ui.widget.FontSupportedTextView
+            <com.addhen.android.raiburari.presentation.view.ui.widget.FontSupportedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/edit_sync_sync_prompt"

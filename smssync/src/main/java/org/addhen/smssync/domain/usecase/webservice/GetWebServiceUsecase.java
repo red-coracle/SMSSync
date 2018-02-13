@@ -25,7 +25,7 @@ import org.addhen.smssync.domain.repository.WebServiceRepository;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Get {@link org.addhen.smssync.domain.entity.WebServiceEntity} use case

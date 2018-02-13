@@ -73,7 +73,7 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/message_from"
             android:layout_toEndOf="@+id/message_from"/>
-    <com.addhen.android.raiburari.presentation.ui.widget.CapitalizedTextView
+    <com.addhen.android.raiburari.presentation.view.ui.widget.CapitalizedTextView
             android:id="@+id/message"
             style="@style/TextView.Description"
             android:layout_width="wrap_content"

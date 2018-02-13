@@ -17,8 +17,8 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseRecyclerViewFragment;
-import com.addhen.android.raiburari.presentation.ui.widget.BloatedRecyclerView;
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseRecyclerViewFragment;
+import com.addhen.android.raiburari.presentation.view.ui.widget.BloatedRecyclerView;
 
 import org.addhen.smssync.R;
 import org.addhen.smssync.data.PrefsFactory;
@@ -130,14 +130,13 @@ public class LogFragment extends BaseRecyclerViewFragment<LogModel, LogAdapter>
     @Override
     public void onPause() {
         super.onPause();
-        mListLogPresenter.pause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mListLogPresenter != null) {
-            mListLogPresenter.destroy();
+            mListLogPresenter.detachView();
         }
     }
 

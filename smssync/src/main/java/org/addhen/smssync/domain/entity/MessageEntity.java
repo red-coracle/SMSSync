@@ -25,6 +25,7 @@ import java.util.Date;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 public class MessageEntity extends Entity {
+    public Long _id;
 
     private String messageBody;
 

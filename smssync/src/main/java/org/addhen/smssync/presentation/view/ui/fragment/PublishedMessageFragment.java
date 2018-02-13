@@ -17,7 +17,7 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseRecyclerViewFragment;
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseRecyclerViewFragment;
 import com.cocosw.bottomsheet.BottomSheet;
 
 import org.addhen.smssync.R;
@@ -119,14 +119,13 @@ public class PublishedMessageFragment extends BaseRecyclerViewFragment<MessageMo
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(broadcastReceiver);
-        mListMessagePresenter.pause();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         if (mListMessagePresenter != null) {
-            mListMessagePresenter.destroy();
+            mListMessagePresenter.detachView();
         }
     }
 

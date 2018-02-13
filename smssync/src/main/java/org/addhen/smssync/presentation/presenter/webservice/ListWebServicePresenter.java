@@ -20,6 +20,7 @@ package org.addhen.smssync.presentation.presenter.webservice;
 import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.entity.WebServiceEntity;
@@ -29,6 +30,7 @@ import org.addhen.smssync.presentation.model.mapper.WebServiceModelDataMapper;
 import org.addhen.smssync.presentation.view.webservice.ListWebServiceView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import java.util.List;
 
@@ -38,8 +40,7 @@ import javax.inject.Named;
 /**
  * @author Ushahidi Team <team@ushahidi.com>
  */
-public class ListWebServicePresenter implements
-        Presenter {
+public class ListWebServicePresenter extends BasePresenter<ListWebServiceView> {
 
     private final ListWebServiceUsecase mUsecase;
 
@@ -60,17 +61,14 @@ public class ListWebServicePresenter implements
         mWebServiceModelDataMapper = webServiceModelDataMapper;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         loadWebServices();
     }
 
     @Override
-    public void pause() {
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(ListWebServiceView view){
+        super.attachView(view);
         mUsecase.unsubscribe();
     }
 
@@ -86,7 +84,7 @@ public class ListWebServicePresenter implements
         mListWebServiceView.showLoading();
         mUsecase.execute(new DefaultSubscriber<List<WebServiceEntity>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mListWebServiceView.hideLoading();
             }
 

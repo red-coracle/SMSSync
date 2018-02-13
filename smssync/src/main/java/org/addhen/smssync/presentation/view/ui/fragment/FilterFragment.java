@@ -17,7 +17,7 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseFragment;
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseFragment;
 
 import org.addhen.smssync.R;
 import org.addhen.smssync.data.PrefsFactory;
@@ -102,18 +102,16 @@ public class FilterFragment extends BaseFragment implements ListFilterView,
     @Override
     public void onPause() {
         super.onPause();
-        mListFilterPresenter.pause();
-        mUpdateWebServiceKeywordsPresenter.pause();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         if (mListFilterPresenter != null) {
-            mListFilterPresenter.destroy();
+            mListFilterPresenter.detachView();
         }
         if (mUpdateWebServiceKeywordsPresenter != null) {
-            mUpdateWebServiceKeywordsPresenter.destroy();
+            mUpdateWebServiceKeywordsPresenter.detachView();
         }
     }
 

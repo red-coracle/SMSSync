@@ -28,7 +28,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Publishes {@link MessageEntity} to a configured {@link

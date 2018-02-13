@@ -17,7 +17,7 @@
 
 package org.addhen.smssync.presentation.view.integration;
 
-import com.addhen.android.raiburari.presentation.ui.view.UiView;
+import com.addhen.android.raiburari.presentation.view.UiView;
 
 import android.app.Activity;
 

@@ -17,8 +17,6 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseFragment;
-
 import org.addhen.smssync.R;
 import org.addhen.smssync.presentation.di.component.FilterComponent;
 import org.addhen.smssync.presentation.model.FilterModel;
@@ -40,6 +38,8 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseFragment;
 
 import java.util.List;
 
@@ -100,11 +100,11 @@ public class AddPhoneNumberFilterFragment extends BaseFragment implements AddFil
     private void initViews() {
         mWhiteListKeywordView.setOnTagSelectListener((view, tag, position) -> {
             mWhiteListKeywordView.removeTag(view, position);
-            mDeleteFilterPresenter.deleteFilters(mFilterModels.get(position)._id);
+            mDeleteFilterPresenter.deleteFilters(mFilterModels.get(position).getId());
         });
         mBlackListKeywordView.setOnTagSelectListener((view, tag, position) -> {
             mBlackListKeywordView.removeTag(view, position);
-            mDeleteFilterPresenter.deleteFilters(mFilterModels.get(position)._id);
+            mDeleteFilterPresenter.deleteFilters(mFilterModels.get(position).getId());
         });
     }
 
@@ -119,17 +119,14 @@ public class AddPhoneNumberFilterFragment extends BaseFragment implements AddFil
     @Override
     public void onPause() {
         super.onPause();
-        mListFilterPresenter.pause();
-        mDeleteFilterPresenter.pause();
-        mAddFilterPresenter.pause();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mListFilterPresenter.destroy();
-        mDeleteFilterPresenter.destroy();
-        mAddFilterPresenter.destroy();
+        mListFilterPresenter.detachView();
+        mDeleteFilterPresenter.detachView();
+        mAddFilterPresenter.detachView();
     }
 
     @OnClick(R.id.add_white_list_numbers_btn)
@@ -181,13 +178,13 @@ public class AddPhoneNumberFilterFragment extends BaseFragment implements AddFil
         for (FilterModel filterModel : mFilterModels) {
             if (filterModel.getStatus().equals(FilterModel.Status.WHITELIST)) {
 
-                KeywordView.Tag tag = new KeywordView.Tag(filterModel._id,
+                KeywordView.Tag tag = new KeywordView.Tag(filterModel.getId(),
                         filterModel.getPhoneNumber(),
                         org.addhen.smssync.presentation.util.Utility.keywordColor(),
                         org.addhen.smssync.presentation.util.Utility.keywordIcon());
                 mWhiteListKeywordView.add(tag);
             } else {
-                KeywordView.Tag tag = new KeywordView.Tag(filterModel._id,
+                KeywordView.Tag tag = new KeywordView.Tag(filterModel.getId(),
                         filterModel.getPhoneNumber(),
                         org.addhen.smssync.presentation.util.Utility.keywordColor(),
                         org.addhen.smssync.presentation.util.Utility.keywordIcon());

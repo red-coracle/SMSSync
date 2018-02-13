@@ -17,7 +17,7 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseRecyclerViewFragment;
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseRecyclerViewFragment;
 import com.cocosw.bottomsheet.BottomSheet;
 
 import org.addhen.smssync.R;
@@ -72,7 +72,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
 
 import static org.addhen.smssync.presentation.service.ServiceConstants.ACTIVE_SYNC;
 import static org.addhen.smssync.presentation.service.ServiceConstants.SYNC_STATUS;
@@ -117,8 +117,6 @@ public class MessageFragment extends BaseRecyclerViewFragment<MessageModel, Mess
 
     private boolean mIsPermanentlyDeleted = true;
 
-    private CompositeSubscription mSubscriptions = new CompositeSubscription();
-
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -159,23 +157,20 @@ public class MessageFragment extends BaseRecyclerViewFragment<MessageModel, Mess
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(broadcastReceiver);
-        mListMessagePresenter.pause();
-        mPublishAllMessagesPresenter.pause();
-        mPublishMessagePresenter.pause();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         if (mListMessagePresenter != null) {
-            mListMessagePresenter.destroy();
+            mListMessagePresenter.detachView();
         }
         if (mPublishAllMessagesPresenter != null) {
-            mPublishAllMessagesPresenter.destroy();
+            mPublishAllMessagesPresenter.detachView();
         }
 
         if (mPublishMessagePresenter != null) {
-            mPublishMessagePresenter.destroy();
+            mPublishMessagePresenter.detachView();
         }
     }
 

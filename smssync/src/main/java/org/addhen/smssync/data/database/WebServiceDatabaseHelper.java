@@ -28,7 +28,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
@@ -59,7 +59,7 @@ public class WebServiceDatabaseHelper extends BaseDatabaseHelper {
             final List<SyncUrl> syncUrlEntity = get(status);
             if (syncUrlEntity != null) {
                 subscriber.onNext(syncUrlEntity);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new WebServiceNotFoundException());
             }
@@ -77,7 +77,7 @@ public class WebServiceDatabaseHelper extends BaseDatabaseHelper {
                     .withDatabase(getReadableDatabase()).query(SyncUrl.class).list();
             if (syncUrls != null) {
                 subscriber.onNext(syncUrls);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new WebServiceNotFoundException());
             }
@@ -97,7 +97,7 @@ public class WebServiceDatabaseHelper extends BaseDatabaseHelper {
                     .byId(id).get();
             if (syncUrlEntity != null) {
                 subscriber.onNext(syncUrlEntity);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new WebServiceNotFoundException());
             }
@@ -120,7 +120,7 @@ public class WebServiceDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(row);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             }
 
         });
@@ -147,7 +147,7 @@ public class WebServiceDatabaseHelper extends BaseDatabaseHelper {
                 } else {
                     subscriber.onError(new Exception());
                 }
-                subscriber.onCompleted();
+                subscriber.onComplete();
             }
 
         });

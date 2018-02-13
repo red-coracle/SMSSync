@@ -60,7 +60,7 @@ public class UpdateMessageService extends BaseWakefulIntentService implements Up
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mUpdateMessagePresenter.destroy();
+        mUpdateMessagePresenter.detachView();
         mDelayedStopHandler.removeCallbacksAndMessages(null);
         mDelayedStopHandler.sendEmptyMessageDelayed(0, STOP_DELAY);
         mDelayedStopHandler.removeCallbacksAndMessages(null);

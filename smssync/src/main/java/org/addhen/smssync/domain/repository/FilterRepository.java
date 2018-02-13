@@ -23,7 +23,7 @@ import org.addhen.smssync.domain.entity.FilterEntity;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Repository for manipulating {@link FilterEntity} data

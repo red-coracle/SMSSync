@@ -17,10 +17,14 @@
 
 package org.addhen.smssync.presentation.presenter.filter;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
+
 import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
 import com.addhen.android.raiburari.presentation.di.qualifier.ActivityScope;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.usecase.filter.AddFilterUsecase;
@@ -36,7 +40,7 @@ import javax.inject.Named;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 @ActivityScope
-public class AddFilterPresenter implements Presenter {
+public class AddFilterPresenter extends BasePresenter<AddFilterView> {
 
     private final AddFilterUsecase mAddFilterUsecase;
 
@@ -55,18 +59,14 @@ public class AddFilterPresenter implements Presenter {
         mAddFilterView = addFilterView;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull AddFilterView view) {
+        super.attachView(view);
         mAddFilterUsecase.unsubscribe();
     }
 
@@ -75,7 +75,7 @@ public class AddFilterPresenter implements Presenter {
         mAddFilterUsecase.setFilter(mFilterModelDataMapper.map(filterModel));
         mAddFilterUsecase.execute(new DefaultSubscriber<Long>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 // Do nothing
             }
 

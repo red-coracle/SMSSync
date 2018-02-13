@@ -17,10 +17,15 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseFragment;
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
+
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseFragment;
 
 import org.addhen.smssync.R;
-import org.addhen.smssync.presentation.App;
 import org.addhen.smssync.presentation.di.component.IntegrationComponent;
 import org.addhen.smssync.presentation.presenter.integration.IntegrationPresenter;
 import org.addhen.smssync.presentation.receiver.SmsReceiver;
@@ -28,12 +33,6 @@ import org.addhen.smssync.presentation.view.integration.IntegrationView;
 import org.addhen.smssync.presentation.view.ui.activity.ListWebServiceActivity;
 import org.addhen.smssync.presentation.view.ui.activity.MainActivity;
 import org.addhen.smssync.presentation.view.ui.navigation.Launcher;
-
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.SwitchCompat;
 
 import javax.inject.Inject;
 
@@ -70,7 +69,7 @@ public class IntegrationFragment extends BaseFragment implements IntegrationView
     public void onDestroy() {
         super.onDestroy();
         if (mIntegrationPresenter != null) {
-            mIntegrationPresenter.destroy();
+            mIntegrationPresenter.detachView();
         }
     }
 

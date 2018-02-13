@@ -28,6 +28,7 @@ import android.os.Parcelable;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 public class WebServiceModel extends Model implements Parcelable {
+    public Long _id;
 
     private String title;
 

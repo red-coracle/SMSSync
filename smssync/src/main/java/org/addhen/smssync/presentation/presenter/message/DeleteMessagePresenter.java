@@ -20,6 +20,7 @@ package org.addhen.smssync.presentation.presenter.message;
 import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.usecase.message.DeleteMessageUsecase;
@@ -28,6 +29,7 @@ import org.addhen.smssync.presentation.model.mapper.MessageModelDataMapper;
 import org.addhen.smssync.presentation.view.message.DeleteMessageView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,7 +37,7 @@ import javax.inject.Named;
 /**
  * @author Ushahidi Team <team@ushahidi.com>
  */
-public class DeleteMessagePresenter implements Presenter {
+public class DeleteMessagePresenter extends BasePresenter<DeleteMessageView> {
 
     private final DeleteMessageUsecase mDeleteMessageUsecase;
 
@@ -52,18 +54,14 @@ public class DeleteMessagePresenter implements Presenter {
         mDeleteMessageView = deleteMessageView;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull DeleteMessageView view) {
+        super.attachView(view);
         mDeleteMessageUsecase.unsubscribe();
     }
 
@@ -87,7 +85,7 @@ public class DeleteMessagePresenter implements Presenter {
         }
 
         @Override
-        public void onCompleted() {
+        public void onComplete() {
             mDeleteMessageView.hideLoading();
         }
 

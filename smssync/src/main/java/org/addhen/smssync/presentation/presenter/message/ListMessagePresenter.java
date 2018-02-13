@@ -22,6 +22,7 @@ import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
 import com.addhen.android.raiburari.domain.usecase.Usecase;
 import com.addhen.android.raiburari.presentation.di.qualifier.ActivityScope;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.entity.MessageEntity;
@@ -30,6 +31,7 @@ import org.addhen.smssync.presentation.model.mapper.MessageModelDataMapper;
 import org.addhen.smssync.presentation.view.message.ListMessageView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import java.util.List;
 
@@ -40,7 +42,7 @@ import javax.inject.Named;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 @ActivityScope
-public class ListMessagePresenter implements Presenter {
+public class ListMessagePresenter extends BasePresenter<ListMessageView> {
 
     private final Usecase mListMessageUsecase;
 
@@ -55,19 +57,14 @@ public class ListMessagePresenter implements Presenter {
         mMessageModelDataMapper = messageModelDataMapper;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         loadMessages();
     }
 
-    @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
-        mListMessageUsecase.unsubscribe();
+    public void attachView(@NonNull ListMessageView view) {
+        super.attachView(view);
+        this.mListMessageUsecase.unsubscribe();
     }
 
     public void setView(@NonNull ListMessageView listMessageView) {
@@ -79,7 +76,7 @@ public class ListMessagePresenter implements Presenter {
         mListMessageView.showLoading();
         mListMessageUsecase.execute(new DefaultSubscriber<List<MessageEntity>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mListMessageView.hideLoading();
             }
 

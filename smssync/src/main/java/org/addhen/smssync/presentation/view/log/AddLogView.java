@@ -17,7 +17,7 @@
 
 package org.addhen.smssync.presentation.view.log;
 
-import com.addhen.android.raiburari.presentation.ui.view.UiView;
+import com.addhen.android.raiburari.presentation.view.UiView;
 
 /**
  * @author Ushahidi Team <team@ushahidi.com>

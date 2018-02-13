@@ -17,12 +17,14 @@
 
 package org.addhen.smssync.data.entity;
 
+import com.addhen.android.raiburari.annotations.Transform;
 import com.addhen.android.raiburari.data.entity.DataEntity;
 
 /**
  * @author Ushahidi Team <team@ushahidi.com>
  */
 public class Filter extends DataEntity {
+    private Long _id;
 
     private String phoneNumber;
 

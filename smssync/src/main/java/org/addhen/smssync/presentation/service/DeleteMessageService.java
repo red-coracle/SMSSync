@@ -58,7 +58,7 @@ public class DeleteMessageService extends BaseWakefulIntentService implements De
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mDeleteMessagePresenter.destroy();
+        mDeleteMessagePresenter.detachView();
         mDelayedStopHandler.removeCallbacksAndMessages(null);
         mDelayedStopHandler.sendEmptyMessageDelayed(0, STOP_DELAY);
         mDelayedStopHandler.removeCallbacksAndMessages(null);

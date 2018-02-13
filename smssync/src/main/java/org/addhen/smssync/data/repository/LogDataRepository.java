@@ -28,7 +28,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * @author Ushahidi Team <team@ushahidi.com>

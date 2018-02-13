@@ -36,7 +36,7 @@ import javax.inject.Singleton;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import rx.Observable;
+import io.reactivex.Observable;
 import timber.log.Timber;
 
 import static okhttp3.internal.Util.UTF_8;

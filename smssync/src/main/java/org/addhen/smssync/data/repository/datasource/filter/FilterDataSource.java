@@ -21,7 +21,7 @@ import org.addhen.smssync.data.entity.Filter;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * @author Ushahidi Team <team@ushahidi.com>

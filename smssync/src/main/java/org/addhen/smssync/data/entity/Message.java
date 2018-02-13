@@ -17,9 +17,8 @@
 
 package org.addhen.smssync.data.entity;
 
-import com.google.gson.annotations.SerializedName;
-
 import com.addhen.android.raiburari.data.entity.DataEntity;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,6 +31,7 @@ import nl.qbusict.cupboard.annotation.Column;
 public class Message extends DataEntity implements Serializable {
 
     private static final long serialVersionUID = 1094372288105228610L;
+    private Long _id;
 
     @SerializedName("message")
     @Column("messages_body")

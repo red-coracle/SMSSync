@@ -25,7 +25,7 @@ import org.addhen.smssync.domain.repository.WebServiceRepository;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Use case that deletes a  WebService from the local database.

@@ -21,6 +21,7 @@ import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
 import com.addhen.android.raiburari.presentation.di.qualifier.ActivityScope;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.entity.MessageEntity;
@@ -30,6 +31,7 @@ import org.addhen.smssync.presentation.model.mapper.MessageModelDataMapper;
 import org.addhen.smssync.presentation.view.message.ListMessageView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import java.util.List;
 
@@ -40,7 +42,7 @@ import javax.inject.Named;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 @ActivityScope
-public class ListPublishedMessagePresenter implements Presenter {
+public class ListPublishedMessagePresenter extends BasePresenter<ListMessageView> {
 
     private final ListPublishedMessageUsecase mListPublishedMessageUsecase;
 
@@ -57,18 +59,14 @@ public class ListPublishedMessagePresenter implements Presenter {
         mMessageModelDataMapper = messageModelDataMapper;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         loadMessages();
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull ListMessageView view) {
+        super.attachView(view);
         mListPublishedMessageUsecase.unsubscribe();
     }
 
@@ -97,7 +95,7 @@ public class ListPublishedMessagePresenter implements Presenter {
         }
 
         @Override
-        public void onCompleted() {
+        public void onComplete() {
             mListMessageView.hideLoading();
         }
 

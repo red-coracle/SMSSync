@@ -23,6 +23,7 @@ import com.addhen.android.raiburari.presentation.model.Model;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 public class PhoneStatusInfoModel extends Model {
+    public Long _id;
 
     private String mPhoneNumber;
 

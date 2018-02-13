@@ -20,6 +20,7 @@ package org.addhen.smssync.presentation.presenter.webservice;
 import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.usecase.webservice.UpdateWebServiceUsecase;
@@ -29,6 +30,7 @@ import org.addhen.smssync.presentation.model.mapper.WebServiceModelDataMapper;
 import org.addhen.smssync.presentation.view.webservice.UpdateWebServiceKeywordsView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -36,7 +38,7 @@ import javax.inject.Named;
 /**
  * @author Ushahidi Team <team@ushahidi.com>
  */
-public class UpdateWebServiceKeywordsPresenter implements Presenter {
+public class UpdateWebServiceKeywordsPresenter extends BasePresenter<UpdateWebServiceKeywordsView> {
 
     private final UpdateWebServiceUsecase mUpdateWebServiceUsecase;
 
@@ -59,18 +61,14 @@ public class UpdateWebServiceKeywordsPresenter implements Presenter {
         mWebServiceModelDataMapper = deploymentModelDataMapper;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull UpdateWebServiceKeywordsView view) {
+        super.attachView(view);
         mUpdateWebServiceUsecase.unsubscribe();
     }
 

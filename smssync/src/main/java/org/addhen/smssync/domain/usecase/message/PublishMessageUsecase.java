@@ -28,7 +28,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Publishes {@link org.addhen.smssync.domain.entity.MessageEntity} to a configured {@link

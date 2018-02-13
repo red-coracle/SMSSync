@@ -17,8 +17,6 @@
 
 package org.addhen.smssync.presentation.view.ui.activity;
 
-import com.addhen.android.raiburari.presentation.ui.activity.BaseActivity;
-
 import org.addhen.smssync.R;
 import org.addhen.smssync.presentation.view.ui.fragment.GettingStartedIntegrationFragment;
 import org.addhen.smssync.presentation.view.ui.fragment.GettingStartedWelcomeFragment;
@@ -37,6 +35,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.addhen.android.raiburari.presentation.view.ui.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

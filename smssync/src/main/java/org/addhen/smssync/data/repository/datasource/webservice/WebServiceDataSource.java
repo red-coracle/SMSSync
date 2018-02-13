@@ -21,7 +21,7 @@ import org.addhen.smssync.data.entity.SyncUrl;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * All different source providers must implement this interface to provide deployment data

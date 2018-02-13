@@ -22,6 +22,7 @@ import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
 import com.addhen.android.raiburari.domain.usecase.Usecase;
 import com.addhen.android.raiburari.presentation.di.qualifier.ActivityScope;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.entity.MessageEntity;
@@ -30,6 +31,7 @@ import org.addhen.smssync.presentation.model.mapper.MessageModelDataMapper;
 import org.addhen.smssync.presentation.view.message.ImportMessageView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import java.util.List;
 
@@ -40,7 +42,7 @@ import javax.inject.Named;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 @ActivityScope
-public class ImportMessagePresenter implements Presenter {
+public class ImportMessagePresenter extends BasePresenter<ImportMessageView> {
 
     private final Usecase mImportMessageUsecase;
 
@@ -55,18 +57,14 @@ public class ImportMessagePresenter implements Presenter {
         mMessageModelDataMapper = messageModelDataMapper;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull ImportMessageView view) {
+        super.attachView(view);
         mImportMessageUsecase.unsubscribe();
     }
 
@@ -79,7 +77,7 @@ public class ImportMessagePresenter implements Presenter {
         mImportMessageView.showLoading();
         mImportMessageUsecase.execute(new DefaultSubscriber<List<MessageEntity>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mImportMessageView.hideLoading();
             }
 

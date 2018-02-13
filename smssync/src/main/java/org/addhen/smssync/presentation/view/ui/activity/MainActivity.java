@@ -18,7 +18,7 @@
 package org.addhen.smssync.presentation.view.ui.activity;
 
 import com.addhen.android.raiburari.presentation.di.HasComponent;
-import com.addhen.android.raiburari.presentation.ui.activity.BaseActivity;
+import com.addhen.android.raiburari.presentation.view.ui.activity.BaseActivity;
 
 import org.addhen.smssync.R;
 import org.addhen.smssync.data.PrefsFactory;
@@ -366,8 +366,7 @@ public class MainActivity extends BaseActivity implements HasComponent<AppActivi
         final MenuItem menuItem = mNavigationView.getMenu().findItem(R.id.nav_integration);
         menuItem.setChecked(true);
         setToolbarTitle(menuItem);
-        replaceFragment(R.id.fragment_main_content, IntegrationFragment.newInstance(),
-                INTEGRATION_TAG);
+        replaceFragment(R.id.fragment_main_content, IntegrationFragment.newInstance(), INTEGRATION_TAG);
     }
 
     private void setupFragment(MenuItem menuItem) {

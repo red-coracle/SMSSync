@@ -17,7 +17,7 @@
 
 package org.addhen.smssync.presentation.view.webservice;
 
-import com.addhen.android.raiburari.presentation.ui.view.UiView;
+import com.addhen.android.raiburari.presentation.view.UiView;
 
 /**
  * Update web service View

@@ -20,6 +20,7 @@ package org.addhen.smssync.presentation.presenter.message;
 import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.usecase.message.UpdateMessageUsecase;
@@ -29,6 +30,7 @@ import org.addhen.smssync.presentation.model.mapper.MessageModelDataMapper;
 import org.addhen.smssync.presentation.view.message.UpdateMessageView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -36,7 +38,7 @@ import javax.inject.Named;
 /**
  * @author Ushahidi Team <team@ushahidi.com>
  */
-public class UpdateMessagePresenter implements Presenter {
+public class UpdateMessagePresenter extends BasePresenter<UpdateMessageView> {
 
     private final UpdateMessageUsecase mUpdateMessageUsecase;
 
@@ -62,18 +64,14 @@ public class UpdateMessagePresenter implements Presenter {
         mUpdateMessageView = updateMessageView;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull UpdateMessageView view) {
+        super.attachView(view);
         mUpdateMessageUsecase.unsubscribe();
     }
 
@@ -87,7 +85,7 @@ public class UpdateMessagePresenter implements Presenter {
                 mMessageModelDataMapper.map(messageModel));
         mUpdateMessageUsecase.execute(new DefaultSubscriber<Long>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 // Do nothing
                 mUpdateMessageView.showLoading();
             }

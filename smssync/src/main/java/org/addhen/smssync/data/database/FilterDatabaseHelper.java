@@ -28,7 +28,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
@@ -57,7 +57,7 @@ public class FilterDatabaseHelper extends BaseDatabaseHelper {
                 }
                 if (filters != null) {
                     subscriber.onNext(filters);
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 } else {
                     subscriber.onError(new FilterNotFoundException());
                 }
@@ -74,7 +74,7 @@ public class FilterDatabaseHelper extends BaseDatabaseHelper {
                         .get(Filter.class, id);
                 if (filter != null) {
                     subscriber.onNext(filter);
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 } else {
                     subscriber.onError(new FilterNotFoundException());
                 }
@@ -94,7 +94,7 @@ public class FilterDatabaseHelper extends BaseDatabaseHelper {
                         .list();
                 if (filters != null) {
                     subscriber.onNext(filters);
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 } else {
                     subscriber.onError(new FilterNotFoundException());
                 }
@@ -114,7 +114,7 @@ public class FilterDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(true);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }
@@ -131,7 +131,7 @@ public class FilterDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(row);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }
@@ -151,7 +151,7 @@ public class FilterDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(row);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }
@@ -171,7 +171,7 @@ public class FilterDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(row);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }
@@ -187,7 +187,7 @@ public class FilterDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(1l);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }

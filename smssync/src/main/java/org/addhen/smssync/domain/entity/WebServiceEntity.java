@@ -23,6 +23,7 @@ import com.addhen.android.raiburari.domain.entity.Entity;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 public class WebServiceEntity extends Entity {
+    public Long _id;
 
     private String title;
 

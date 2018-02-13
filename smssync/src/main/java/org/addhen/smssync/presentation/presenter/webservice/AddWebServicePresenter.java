@@ -20,6 +20,7 @@ package org.addhen.smssync.presentation.presenter.webservice;
 import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.usecase.webservice.AddWebServiceUsecase;
@@ -31,6 +32,7 @@ import org.addhen.smssync.presentation.view.webservice.AddWebServiceView;
 import org.addhen.smssync.presentation.view.webservice.TestWebServiceView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,7 +40,7 @@ import javax.inject.Named;
 /**
  * @author Ushahidi Team <team@ushahidi.com>
  */
-public class AddWebServicePresenter implements Presenter {
+public class AddWebServicePresenter extends BasePresenter<AddWebServiceView> {
 
     private final AddWebServiceUsecase mAddWebServiceUsecase;
 
@@ -66,18 +68,14 @@ public class AddWebServicePresenter implements Presenter {
         mTestWebServiceUsecase = testWebServiceUsecase;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull AddWebServiceView view) {
+        super.attachView(view);
         mAddWebServiceUsecase.unsubscribe();
         mTestWebServiceUsecase.unsubscribe();
     }
@@ -99,7 +97,7 @@ public class AddWebServicePresenter implements Presenter {
         mAddWebServiceUsecase.setWebServiceEntity(mWebServiceModelDataMapper.map(webServiceModel));
         mAddWebServiceUsecase.execute(new DefaultSubscriber<Long>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mAddWebServiceView.hideLoading();
             }
 
@@ -126,7 +124,7 @@ public class AddWebServicePresenter implements Presenter {
             }
 
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mTestWebServiceView.hideLoading();
             }
 

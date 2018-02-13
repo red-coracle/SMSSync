@@ -21,6 +21,7 @@ import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
 import com.addhen.android.raiburari.domain.usecase.Usecase;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.R;
@@ -30,6 +31,7 @@ import org.addhen.smssync.presentation.model.mapper.MessageModelDataMapper;
 import org.addhen.smssync.presentation.view.message.PublishAllMessagesView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,7 +39,7 @@ import javax.inject.Named;
 /**
  * @author Ushahidi Team <team@ushahidi.com>
  */
-public class PublishAllMessagesPresenter implements Presenter {
+public class PublishAllMessagesPresenter extends BasePresenter<PublishAllMessagesView> {
 
     private final Usecase mPublishAllMessagesUsecase;
 
@@ -61,18 +63,14 @@ public class PublishAllMessagesPresenter implements Presenter {
         mPublishMessagesView = publishMessageView;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull PublishAllMessagesView view) {
+        super.attachView(view);
         mPublishAllMessagesUsecase.unsubscribe();
     }
 
@@ -100,7 +98,7 @@ public class PublishAllMessagesPresenter implements Presenter {
         }
 
         @Override
-        public void onCompleted() {
+        public void onComplete() {
             mPublishMessagesView.hideLoading();
         }
 

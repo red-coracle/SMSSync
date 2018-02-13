@@ -17,10 +17,6 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseRecyclerViewFragment;
-import com.addhen.android.raiburari.presentation.ui.listener.RecyclerViewItemTouchListenerAdapter;
-import com.addhen.android.raiburari.presentation.ui.widget.BloatedRecyclerView;
-
 import org.addhen.smssync.R;
 import org.addhen.smssync.data.PrefsFactory;
 import org.addhen.smssync.presentation.di.component.WebServiceComponent;
@@ -49,6 +45,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseRecyclerViewFragment;
+import com.addhen.android.raiburari.presentation.view.ui.listener.RecyclerViewItemTouchListenerAdapter;
+import com.addhen.android.raiburari.presentation.view.ui.widget.BloatedRecyclerView;
 
 import java.util.List;
 
@@ -309,7 +309,7 @@ public class ListWebServiceFragment
             public void onDismissed(Snackbar snackbar, int event) {
                 super.onDismissed(snackbar, event);
                 if (event != Snackbar.Callback.DISMISS_EVENT_ACTION) {
-                    mDeleteWebServicePresenter.deleteWebService(mRemovedWebServiceModel._id);
+                    mDeleteWebServicePresenter.deleteWebService(mRemovedWebServiceModel.getId());
                 }
             }
         });
@@ -350,13 +350,12 @@ public class ListWebServiceFragment
     @Override
     public void onPause() {
         super.onPause();
-        mListWebServicePresenter.pause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mListWebServicePresenter.destroy();
+        mListWebServicePresenter.detachView();
     }
 
     @Override

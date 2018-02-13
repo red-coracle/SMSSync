@@ -17,8 +17,8 @@
 
 package org.addhen.smssync.presentation.view.ui.adapter;
 
-import com.addhen.android.raiburari.presentation.ui.adapter.BaseRecyclerViewAdapter;
-import com.addhen.android.raiburari.presentation.ui.widget.CapitalizedTextView;
+import com.addhen.android.raiburari.presentation.view.ui.adapter.BaseRecyclerViewAdapter;
+import com.addhen.android.raiburari.presentation.view.ui.widget.CapitalizedTextView;
 
 import org.addhen.smssync.R;
 import org.addhen.smssync.presentation.model.WebServiceModel;

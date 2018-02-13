@@ -23,7 +23,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * @author Ushahidi Team <team@ushahidi.com>
@@ -268,7 +268,7 @@ public class FileManager {
         return Observable.create(subscriber -> {
             appendAndClose(log.getMessage());
             subscriber.onNext(1l);
-            subscriber.onCompleted();
+            subscriber.onComplete();
         });
     }
 
@@ -276,7 +276,7 @@ public class FileManager {
         return Observable.create(subscriber -> {
             deleteLog(mName);
             subscriber.onNext(1l);
-            subscriber.onCompleted();
+            subscriber.onComplete();
         });
     }
 
@@ -287,7 +287,7 @@ public class FileManager {
                 Log log = new Log();
                 log.setMessage(logString);
                 subscriber.onNext(log);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new LogNotFoundException());
             }

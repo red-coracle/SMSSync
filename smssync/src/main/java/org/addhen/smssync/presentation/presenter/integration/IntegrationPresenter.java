@@ -21,6 +21,7 @@ import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
 import com.addhen.android.raiburari.domain.usecase.Usecase;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.data.PrefsFactory;
@@ -35,6 +36,8 @@ import org.addhen.smssync.presentation.view.integration.IntegrationView;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import java.util.List;
 
@@ -44,7 +47,7 @@ import javax.inject.Named;
 /**
  * @author Ushahidi Team <team@ushahidi.com>
  */
-public class IntegrationPresenter implements Presenter {
+public class IntegrationPresenter extends BasePresenter<IntegrationView> {
 
     private final Usecase mGetActiveWebServiceUsecase;
 
@@ -83,18 +86,14 @@ public class IntegrationPresenter implements Presenter {
         mComponentName = componentName;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull IntegrationView view) {
+        super.attachView(view);
         mGetActiveWebServiceUsecase.unsubscribe();
     }
 
@@ -115,8 +114,12 @@ public class IntegrationPresenter implements Presenter {
 
 
     public void startSyncServices() {
-
-        if (Utility.isDefaultSmsApp(mIntegrationView.getAppContext())) {
+        mPackageManager.setComponentEnabledSetting(mComponentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+        mPrefsFactory.serviceEnabled().set(true);
+        mServiceControl.runAutoSyncService();
+        mServiceControl.runCheckTaskService();
+        Utility.showNotification(mIntegrationView.getAppContext());
+        /*if (Utility.isDefaultSmsApp(mIntegrationView.getAppContext())) {
             mPackageManager.setComponentEnabledSetting(mComponentName,
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
             // Because the services to be run depends on the status of enabled services so save the
@@ -135,7 +138,7 @@ public class IntegrationPresenter implements Presenter {
             return;
         }
         mPrefsFactory.serviceEnabled().set(false);
-        Utility.makeDefaultSmsApp(mIntegrationView.getActivityContext());
+        Utility.makeDefaultSmsApp(mIntegrationView.getActivityContext());*/
     }
 
     public void stopSyncServices() {

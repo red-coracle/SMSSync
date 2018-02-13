@@ -49,7 +49,7 @@
             android:layout_height="1dp"
             android:background="?attr/dividerVertical"/>
 
-    <com.addhen.android.raiburari.presentation.ui.widget.BloatedRecyclerView
+    <com.addhen.android.raiburari.presentation.view.ui.widget.BloatedRecyclerView
             android:id="@id/android:list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

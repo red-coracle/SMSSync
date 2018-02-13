@@ -17,7 +17,7 @@
 
 package org.addhen.smssync.presentation.view.webservice;
 
-import com.addhen.android.raiburari.presentation.ui.view.LoadDataView;
+import org.addhen.smssync.presentation.view.message.LoadDataView;
 
 /**
  * @author Ushahidi Team <team@ushahidi.com>

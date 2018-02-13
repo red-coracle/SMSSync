@@ -18,7 +18,7 @@
 package org.addhen.smssync.presentation.view.ui.activity;
 
 import com.addhen.android.raiburari.presentation.di.HasComponent;
-import com.addhen.android.raiburari.presentation.ui.activity.BaseActivity;
+import com.addhen.android.raiburari.presentation.view.ui.activity.BaseActivity;
 
 import org.addhen.smssync.R;
 import org.addhen.smssync.presentation.App;

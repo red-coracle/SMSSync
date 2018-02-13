@@ -21,6 +21,7 @@ import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
 import com.addhen.android.raiburari.presentation.di.qualifier.ActivityScope;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.usecase.filter.DeleteFilterUsecase;
@@ -29,6 +30,7 @@ import org.addhen.smssync.presentation.model.mapper.FilterModelDataMapper;
 import org.addhen.smssync.presentation.view.filter.DeleteFilterView;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,7 +39,7 @@ import javax.inject.Named;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 @ActivityScope
-public class DeleteFilterPresenter implements Presenter {
+public class DeleteFilterPresenter extends BasePresenter<DeleteFilterView> {
 
     private final DeleteFilterUsecase mDeleteFilterUsecase;
 
@@ -52,18 +54,14 @@ public class DeleteFilterPresenter implements Presenter {
         mFilterModelDataMapper = filterModelDataMapper;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull DeleteFilterView view) {
+        super.attachView(view);
         mDeleteFilterUsecase.unsubscribe();
     }
 

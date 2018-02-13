@@ -23,7 +23,7 @@ import org.addhen.smssync.domain.entity.WebServiceEntity;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Repository for manipulating {@link org.addhen.smssync.domain.entity.WebServiceEntity} data

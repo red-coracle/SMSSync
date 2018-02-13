@@ -17,12 +17,10 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseFragment;
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseFragment;
 
 import org.addhen.smssync.R;
-import org.addhen.smssync.presentation.App;
 import org.addhen.smssync.presentation.view.ui.activity.ListWebServiceActivity;
-import org.addhen.smssync.presentation.view.ui.activity.MainActivity;
 
 import butterknife.OnClick;
 

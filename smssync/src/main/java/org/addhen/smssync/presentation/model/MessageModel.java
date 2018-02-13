@@ -17,10 +17,10 @@
 
 package org.addhen.smssync.presentation.model;
 
-import com.addhen.android.raiburari.presentation.model.Model;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.addhen.android.raiburari.presentation.model.Model;
 
 import java.util.Date;
 
@@ -28,6 +28,7 @@ import java.util.Date;
  * @author Henry Addo
  */
 public class MessageModel extends Model implements Parcelable {
+    public Long _id;
 
     private String messageBody;
 

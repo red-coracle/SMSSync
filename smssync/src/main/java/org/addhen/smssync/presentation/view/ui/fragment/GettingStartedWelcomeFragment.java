@@ -17,11 +17,11 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseFragment;
-
 import org.addhen.smssync.R;
 
 import android.os.Bundle;
+
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseFragment;
 
 /**
  * @author Ushahidi Team <team@ushahidi.com>

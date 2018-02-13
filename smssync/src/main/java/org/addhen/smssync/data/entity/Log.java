@@ -17,7 +17,9 @@
 
 package org.addhen.smssync.data.entity;
 
+
 import com.addhen.android.raiburari.data.entity.DataEntity;
+import com.addhen.android.raiburari.annotations.Transform;
 
 /**
  * Log message
@@ -25,6 +27,7 @@ import com.addhen.android.raiburari.data.entity.DataEntity;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 public class Log extends DataEntity {
+    public Long _id;
 
     private String message;
 

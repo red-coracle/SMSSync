@@ -17,8 +17,6 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseFragment;
-
 import org.addhen.smssync.R;
 import org.addhen.smssync.data.util.Utility;
 import org.addhen.smssync.presentation.di.component.WebServiceComponent;
@@ -37,6 +35,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

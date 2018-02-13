@@ -17,7 +17,7 @@
 
 package org.addhen.smssync.presentation.view.filter;
 
-import com.addhen.android.raiburari.presentation.ui.view.UiView;
+import com.addhen.android.raiburari.presentation.view.UiView;
 
 import org.addhen.smssync.presentation.model.FilterModel;
 import org.addhen.smssync.presentation.model.WebServiceModel;

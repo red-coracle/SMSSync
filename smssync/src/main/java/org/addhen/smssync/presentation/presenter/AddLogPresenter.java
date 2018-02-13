@@ -17,10 +17,14 @@
 
 package org.addhen.smssync.presentation.presenter;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
+
 import com.addhen.android.raiburari.domain.exception.DefaultErrorHandler;
 import com.addhen.android.raiburari.domain.exception.ErrorHandler;
 import com.addhen.android.raiburari.domain.usecase.DefaultSubscriber;
 import com.addhen.android.raiburari.presentation.di.qualifier.ActivityScope;
+import com.addhen.android.raiburari.presentation.presenter.BasePresenter;
 import com.addhen.android.raiburari.presentation.presenter.Presenter;
 
 import org.addhen.smssync.domain.entity.LogEntity;
@@ -35,7 +39,7 @@ import javax.inject.Named;
  * @author Ushahidi Team <team@ushahidi.com>
  */
 @ActivityScope
-public class AddLogPresenter implements Presenter {
+public class AddLogPresenter extends BasePresenter<AddLogView> {
 
     private final AddLogUsecase mAddLogUsecase;
 
@@ -50,18 +54,14 @@ public class AddLogPresenter implements Presenter {
         mAddLogView = addLogView;
     }
 
-    @Override
+    @UiThread
     public void resume() {
         // Do nothing
     }
 
     @Override
-    public void pause() {
-        // Do nothing
-    }
-
-    @Override
-    public void destroy() {
+    public void attachView(@NonNull AddLogView view) {
+        super.attachView(view);
         mAddLogUsecase.unsubscribe();
     }
 
@@ -72,7 +72,7 @@ public class AddLogPresenter implements Presenter {
         mAddLogUsecase.setLog(logEntity);
         mAddLogUsecase.execute(new DefaultSubscriber<Long>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 // Do nothing
             }
 

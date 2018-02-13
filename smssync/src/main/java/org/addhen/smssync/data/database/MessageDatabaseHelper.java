@@ -29,7 +29,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
@@ -58,7 +58,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(row);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }
@@ -76,7 +76,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(row);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }
@@ -97,7 +97,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                 }
                 if (messages != null) {
                     subscriber.onNext(messages);
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 } else {
                     subscriber.onError(new MessageNotFoundException());
                 }
@@ -161,7 +161,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                 }
                 if (messages != null) {
                     subscriber.onNext(messages);
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 } else {
                     subscriber.onError(new MessageNotFoundException());
                 }
@@ -185,7 +185,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                 }
                 if (messages != null) {
                     subscriber.onNext(messages);
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 } else {
                     subscriber.onError(new MessageNotFoundException());
                 }
@@ -219,7 +219,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                 }
                 if (messages != null) {
                     subscriber.onNext(messages);
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 } else {
                     subscriber.onError(new MessageNotFoundException());
                 }
@@ -240,7 +240,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                 }
                 if (message != null) {
                     subscriber.onNext(message);
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 } else {
                     subscriber.onError(new MessageNotFoundException());
                 }
@@ -259,7 +259,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(1l);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }
@@ -275,7 +275,7 @@ public class MessageDatabaseHelper extends BaseDatabaseHelper {
                     subscriber.onError(e);
                 }
                 subscriber.onNext(1l);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             } else {
                 subscriber.onError(new Exception());
             }

@@ -17,8 +17,6 @@
 
 package org.addhen.smssync.presentation.view.ui.fragment;
 
-import com.addhen.android.raiburari.presentation.ui.fragment.BaseFragment;
-
 import org.addhen.smssync.R;
 import org.addhen.smssync.presentation.di.component.WebServiceComponent;
 import org.addhen.smssync.presentation.model.SyncSchemeModel;
@@ -42,6 +40,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.addhen.android.raiburari.presentation.view.ui.fragment.BaseFragment;
 
 import javax.inject.Inject;
 
@@ -169,13 +169,12 @@ public class AddWebServiceFragment extends BaseFragment implements AddWebService
     @Override
     public void onPause() {
         super.onPause();
-        mAddWebServicePresenter.pause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mAddWebServicePresenter.destroy();
+        mAddWebServicePresenter.detachView();
     }
 
     private void initialize() {

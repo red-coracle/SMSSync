@@ -17,6 +17,7 @@
 
 package org.addhen.smssync.data.entity;
 
+import com.addhen.android.raiburari.annotations.Transform;
 import com.addhen.android.raiburari.data.entity.DataEntity;
 
 /**
@@ -25,6 +26,7 @@ import com.addhen.android.raiburari.data.entity.DataEntity;
 // TODO: Rename this web service to match the new nomenclature for sync url
 // TODO: Update database to match the name
 public class SyncUrl extends DataEntity {
+    public Long _id;
 
     private String title;
 
